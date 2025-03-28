@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Estilos para las imagenes */
+img {
+    width: 100%;
+    max-width: 450px; /* Reduccion de tamaños, puede cambiarse a antojo*/
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /*transisión suave para el hover */
+}
+
+/* Efecto hover para imágenes para que cambien al pasar el cursor encima */
+.imagen-receta:hover img {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Fondo de página */
+body {
+    font-family: 'Roboto', sans-serif; /*se usa la fuente de google fonts y aparte sans-serif que es por defecto del sistema*/
+    background-color: #f2f0f9; /* Color de fondo suave, puede cambiarse a antojo para notar el cambio*/
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /*Textura de fondo que junta con el color*/
+    color: #333; /*color del texto principal*/
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Encabezado */
+header {
+    background-color: #5d4037;
+    background-image: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /*Imagen generica de fondo, se puede cambiar*/
+    /*ejemplo de otra imagen a usar, solo cambiar el url https://media.admagazine.com/photos/62608c8edacdcbacd3d7e611/16:9/w_2560%2Cc_limit/ArchDigest_NeelMorley9819_Gemmola.jpg*/
+    background-size: cover; /*ajusta la imagen al tamaño del contenedor */
+    background-position: center; 
+    background-blend-mode:multiply; /* Mezcla la imagen con el color de fondo, se puede cambiar a "normal" para ver el cambio */
+    color: white; /*Color del texto */
+    padding: 20px 40px;
+    text-align: center;
+    border-bottom: 2px solid #3e2723;
+}
+
+/*Navegación dentro del header, para sus ociones de "inicio", "recetas" y "contacto"*/
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/*Cambiar partes del header como el subrayado de las opciones, el tamaño etc... */
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    padding: 8px 16px;
+    border-radius: 25px;
+    background-color: rgba(93, 64, 55, 0.7);
+    transition: all 0.3s ease; /* Transición suave, se puede incrementar los segundos para ver camvbio */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/*Efecto hover para los enlaces de navegación */
+nav a:hover {
+    background-color: #d7ccc8;
+    color: #5d4037;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+main {
+    flex: 1;
+    padding: 30px 20px; /* Espacio interno */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Espacio uniforme entre secciones */
+}
+
+/* Contenedor de recetas usando flexbox, cambiar para ver cambios en los contenedores de recetas ya que están estructuradas originalmente*/
+.contenedor-recetas {
+    display: flex;
+    flex-wrap: wrap; /*Permite que las tarjetas se ajusten en varias filas */
+    justify-content: space-around; /* la distribución uniforme */
+    gap: 30px; 
+}
+
+/*Sección de recetas,*/
+.seccion-receta {
+    flex: 1 1 500px; 
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 35px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 0; 
+    transition: all 0.3s ease-out; /*transición más suave */
+    will-change: transform; /*Mejora el rendimiento al aplicar transformaciones de animaciones */
+}
+
+.seccion-receta:hover {
+    transform: translateY(-5px) scale(1.02); /* Aumenta el tamaño de las seciones*/
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 1); /*Aumenta la sombra al pasar el cursor, se puede cambiar a vloluntad */
+}
+
+/* NO LOGRÉ EL DESVANECIMIENTO AL HACER SCROLL POR COMPLETO, añadí el efecto de aparición y trabaja en conjunto con los efectos de desaparion y aparicion de las lineas 134 en adelante*/
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.seccion-receta {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /*Inicialmente invisible, se puede cambiar a 1 para ver el cambio inicial*/
+}
+
+/* Retrasos escalonados para cada secion de recetas, cambiamble a antojo para dar efecto de aparición */
+.seccion-receta:nth-child(1) { animation-delay: 0.4s; }
+.seccion-receta:nth-child(2) { animation-delay: 0.6s; }
+.seccion-receta:nth-child(3) { animation-delay: 0.8s; }
+.seccion-receta:nth-child(4) { animation-delay: 1s; }
+
+
+/*Contenido de recetas */
+.contenido-receta {
+    flex: 1;
+    min-width: 250px; 
+    padding: 10px; 
+}
+
+.imagen-receta {
+    flex: 1;
+    min-width: 250px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tipografía para los textos*/
+h1 {
+    font-family: 'Playfair Display', serif; /*se usa la fuente de google fonts y aparte sans-serif que es por defecto del sistema*/
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #5d4037;
+    text-transform: capitalize;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #8d6e63;
+    display: inline-block;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 25px 0 15px; 
+    color: #6d4c41;
+    border-left: 3px solid #a1887f;
+    padding-left: 12px; /*padding para mejor espaciado */
+}
+
+/*Listas de las recetas */
+.ingredientes, .procedimiento {
+    margin-left: 20px;
+    margin-bottom: 25px; /*Más margen inferior */
+}
+
+.ingredientes li {
+    margin-bottom: 10px; /*Espacio entre ingredientes */
+    line-height: 1.8;
+}
+
+.procedimiento li {
+    margin-bottom: 15px; /*Espacio entre pasos */
+    padding-left: 5px; 
+}
+
+/*Pie de página */
+footer {
+    background-color: #5d4037;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 2px solid #3e2723;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
